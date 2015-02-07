@@ -50,9 +50,9 @@ public class Percolation {
       int x = StdIn.readInt();
       int y = StdIn.readInt();
       perc.open(x, y);
-      StdOut.println(x + " " + y);
+      //StdOut.println(x + " " + y);
     }
-    StdOut.println(perc.percolates() + " is true ?");
+    //StdOut.println(perc.percolates() + " is true ?");
   }
 
   public boolean isOpen(int x, int y) {
@@ -65,7 +65,7 @@ public class Percolation {
   }
 
   public boolean percolates() {
-    StdOut.println(uf.find(0) + " " + uf.find(area-1));
+    //StdOut.println(uf.find(0) + " " + uf.find(area-1));
     return uf.connected(0, area-1);
   }
 
