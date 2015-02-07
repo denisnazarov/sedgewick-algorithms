@@ -2,6 +2,9 @@ public class PercolationStats {
   private double[] trialResults;
   private int siteCount;
   public PercolationStats(int N, int T) {
+    if (N <= 0) throw new IllegalArgumentException("N must be greater than 0");
+    if (T <= 0) throw new IllegalArgumentException("T must be greater than 0");
+
     siteCount = N * N;
     trialResults = new double[T];
 
@@ -40,12 +43,11 @@ public class PercolationStats {
   public static void main(String[] args)  {
     int N = Integer.parseInt(args[0]);
     int T = Integer.parseInt(args[1]);
-
     PercolationStats stats = new PercolationStats(N, T);
-    StdOut.println(stats.mean());
-    StdOut.println(stats.stddev());
-    StdOut.println(stats.confidenceLo());
-    StdOut.println(stats.confidenceHi());
+
+    StdOut.println("mean                    = " + stats.mean());
+    StdOut.println("stddev                  = " + stats.stddev());
+    StdOut.println("95% confidence interval = " + stats.confidenceLo() + ", " +  stats.confidenceHi());
   }
 
 }
