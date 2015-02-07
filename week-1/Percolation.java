@@ -27,11 +27,9 @@ public class Percolation {
 
   private void connectUF(int xA, int yA, int xB, int yB) {
     if (xB < 1) {
-      // Connect to top virtual site
-      uf.union(0, xyTo1D(xA, yA));
+      uf.union(0, xyTo1D(xA, yA)); // Connect to top virtual site
     } else if (xB > gridSize) {
-      // Connect to bottom virtual site
-      uf.union(area-1, xyTo1D(xA, yA));
+      uf.union(area-1, xyTo1D(xA, yA)); // Connect to bottom virtual site
     } else if (yB > 0 && yB < gridSize+1) {
       if (isOpen(xB, yB)) {
         uf.union(xyTo1D(xA, yA), xyTo1D(xB, yB));
@@ -50,9 +48,7 @@ public class Percolation {
       int x = StdIn.readInt();
       int y = StdIn.readInt();
       perc.open(x, y);
-      //StdOut.println(x + " " + y);
     }
-    //StdOut.println(perc.percolates() + " is true ?");
   }
 
   public boolean isOpen(int x, int y) {
@@ -65,7 +61,6 @@ public class Percolation {
   }
 
   public boolean percolates() {
-    //StdOut.println(uf.find(0) + " " + uf.find(area-1));
     return uf.connected(0, area-1);
   }
 
