@@ -27,14 +27,10 @@ public class PercolationStats {
     return StdStats.stddev(trialResults);
   }
   public double confidenceLo() {
-    double mean = mean();
-    double stddev = stddev();
-    return mean - (1.96 * stddev)/Math.sqrt(siteCount);
+    return mean() - (1.96 * stddev())/Math.sqrt(siteCount);
   }
   public double confidenceHi() {
-    double mean = mean();
-    double stddev = stddev();
-    return mean + (1.96 * stddev)/Math.sqrt(siteCount);
+    return mean() + (1.96 * stddev())/Math.sqrt(siteCount);
   }
 
   private int random(int N) {
