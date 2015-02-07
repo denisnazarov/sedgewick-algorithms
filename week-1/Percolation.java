@@ -16,6 +16,7 @@ public class Percolation {
   }
 
   public void open(int x, int y) {
+    checkWithinRange(x ,y);
     int arrayIndex = xyTo1D(x, y);
     isOpenArray[arrayIndex] = true;
 
@@ -23,6 +24,26 @@ public class Percolation {
     connectUF(x, y, x+1, y); // Below
     connectUF(x, y, x, y-1); // Left
     connectUF(x, y, x, y+1); // Right
+  }
+
+  public boolean isOpen(int x, int y) {
+    checkWithinRange(x ,y);
+    int arrayIndex = xyTo1D(x,y);
+    return isOpenArray[arrayIndex];
+  }
+
+  public boolean isFull(int x, int y) {
+    checkWithinRange(x ,y);
+    return uf.connected(0, xyTo1D(x, y));
+  }
+
+  public boolean percolates() {
+    return uf.connected(0, area-1);
+  }
+
+  private void checkWithinRange(int x, int y) {
+    if (x < 1 || x > gridSize) throw new IndexOutOfBoundsException("Row index out of bounds");
+    if (y < 1 || y > gridSize) throw new IndexOutOfBoundsException("Column index out of bounds");
   }
 
   private void connectUF(int xA, int yA, int xB, int yB) {
@@ -49,19 +70,6 @@ public class Percolation {
       int y = StdIn.readInt();
       perc.open(x, y);
     }
-  }
-
-  public boolean isOpen(int x, int y) {
-    int arrayIndex = xyTo1D(x,y);
-    return isOpenArray[arrayIndex];
-  }
-
-  public boolean isFull(int x, int y) {
-    return uf.connected(0, xyTo1D(x, y));
-  }
-
-  public boolean percolates() {
-    return uf.connected(0, area-1);
   }
 
 }
