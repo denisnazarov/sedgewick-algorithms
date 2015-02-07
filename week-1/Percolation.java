@@ -61,7 +61,7 @@ public class Percolation {
   }
 
   public boolean isFull(int x, int y) {
-    return uf.connected(0, xyTo1D(x, y)) || uf.connected(area - 1, xyTo1D(x, y));
+    return uf.connected(0, xyTo1D(x, y));
   }
 
   public boolean percolates() {
