@@ -1,10 +1,11 @@
 public class PercolationStats {
+  private double[] trialResults;
+  private int siteCount;
+  public PercolationStats(int N, int T) {
+    siteCount = N * N;
+    trialResults = new double[T];
 
-  public static void main(String[] args)  {
-    int N = Integer.parseInt(args[0]);
-    int T = Integer.parseInt(args[1]);
-
-    for (int i = 1; i <= T; i++) {
+    for (int i = 0; i < T; i++) {
       Percolation perc = new Percolation(N);
       int sitesOpen = 0;
       while(!perc.percolates()) {
@@ -15,13 +16,40 @@ public class PercolationStats {
           perc.open(x, y);
         }
       }
-      StdOut.println(sitesOpen);
+      trialResults[i] = (double) sitesOpen / (double) siteCount;
     }
 
   }
+  public double mean() {
+    return StdStats.mean(trialResults);
+  }
+  public double stddev() {
+    return StdStats.stddev(trialResults);
+  }
+  public double confidenceLo() {
+    double mean = mean();
+    double stddev = stddev();
+    return mean - (1.96 * stddev)/Math.sqrt(siteCount);
+  }
+  public double confidenceHi() {
+    double mean = mean();
+    double stddev = stddev();
+    return mean + (1.96 * stddev)/Math.sqrt(siteCount);
+  }
 
-  public static int random(int N) {
+  private int random(int N) {
     return (int)Math.floor((StdRandom.uniform() * N) + 1);
+  }
+
+  public static void main(String[] args)  {
+    int N = Integer.parseInt(args[0]);
+    int T = Integer.parseInt(args[1]);
+
+    PercolationStats stats = new PercolationStats(N, T);
+    StdOut.println(stats.mean());
+    StdOut.println(stats.stddev());
+    StdOut.println(stats.confidenceLo());
+    StdOut.println(stats.confidenceHi());
   }
 
 }
