@@ -1,0 +1,8 @@
+# run using `gnuplot plot.dem`
+set title "Order of Growth (log-log)"
+set xlabel "lg(N)"
+set ylabel "lg(T(N))"
+set logscale
+set terminal png
+set output "graph.png"
+plot "input.data" using 1:2 title "runtime" with linespoints
