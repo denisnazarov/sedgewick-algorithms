@@ -6,6 +6,7 @@ public class Percolation {
   private boolean[] isOpenArray;
 
   public Percolation(int N) {
+    if (N <= 0) throw new IllegalArgumentException("N must be greater than 0");
     gridSize = N;
     area = gridSize * gridSize +2;
     isOpenArray = new boolean[area];
