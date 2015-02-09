@@ -1,11 +1,12 @@
 public class PercolationStats {
   private double[] trialResults;
-  private int siteCount;
+  private int trials;
   public PercolationStats(int N, int T) {
     if (N <= 0) throw new IllegalArgumentException("N must be greater than 0");
     if (T <= 0) throw new IllegalArgumentException("T must be greater than 0");
+    trials = T;
 
-    siteCount = N * N;
+    int siteCount = N * N;
     trialResults = new double[T];
 
     for (int i = 0; i < T; i++) {
@@ -30,10 +31,10 @@ public class PercolationStats {
     return StdStats.stddev(trialResults);
   }
   public double confidenceLo() {
-    return mean() - (1.96 * stddev())/Math.sqrt(siteCount);
+    return mean() - (1.96 * stddev())/Math.sqrt(trials);
   }
   public double confidenceHi() {
-    return mean() + (1.96 * stddev())/Math.sqrt(siteCount);
+    return mean() + (1.96 * stddev())/Math.sqrt(trials);
   }
 
   private int random(int N) {
