@@ -37,7 +37,7 @@ public class PercolationStats {
   }
 
   private int random(int N) {
-    return (int)Math.floor((StdRandom.uniform() * N) + 1);
+    return StdRandom.uniform(N) + 1;
   }
 
   public static void main(String[] args)  {
